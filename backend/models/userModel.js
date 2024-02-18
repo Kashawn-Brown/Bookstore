@@ -8,7 +8,6 @@ similar to how tables and columns work in relational databases
 //Mongoose Schema for users
 
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
 
 // Define a schema for the user collection
