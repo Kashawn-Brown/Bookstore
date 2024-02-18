@@ -11,12 +11,14 @@ const mongoose = require('mongoose');
 
 
 // Define a schema for books
+//do not need id field because Mongoose already creates an _id field for each document in the collection
 const bookSchema = new mongoose.Schema({
     title: { type: String, required: true },
     authors: [{ type: String, required: true }],
     description: { type: String },
     publishedDate: { type: String },
     pageCount: { type: Number },
+    genre: [{ type: String }],
     categories: [{ type: String }],
     language: { type: String },
     availableOnline: {type: Boolean},
