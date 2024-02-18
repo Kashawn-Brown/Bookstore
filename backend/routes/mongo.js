@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const axios = require('axios');
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/booksDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
@@ -43,5 +43,4 @@ async function fetchBooks() {
         console.error('Error fetching and storing books:', error);
     }
 }
-
 fetchBooks();

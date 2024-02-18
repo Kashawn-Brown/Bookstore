@@ -7,8 +7,8 @@ const bodyParser = require("body-parser");
 const app = express();
 
 //Telling Express to use the body-parser middleware for parsing JSON bodies
-app.use(bodyParser.json());
-
+//parses incoming request bodies in a middleware before your handlers
+app.use(bodyParser.json()); //or can apparently use express.json() ~ bodyparser.json vs express.json
 //Setting up routes for different parts of applictaion
 /*
 1. Sets up a route for handling authentication-related requests under the /api/auth path
