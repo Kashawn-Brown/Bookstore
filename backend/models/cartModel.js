@@ -15,7 +15,7 @@ const Schema = mongoose.Schema;
 const cartItemSchema = new Schema({
     bookId: { type: Schema.Types.ObjectId, ref: 'Book', required: true },
     quantity: { type: Number, required: true },
-    //price: { type: Number, required: true } // Price of the item
+    price: { type: Number, required: true } // Price of the item
 
 });
 

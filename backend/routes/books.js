@@ -1,5 +1,11 @@
 //Book Catalog
 
+/* 
+To consider:
+  recommended books (same series, same author, etc.)
+  Different type of search (keyword...)
+*/
+
 const express = require('express');
 const router = express.Router();
 

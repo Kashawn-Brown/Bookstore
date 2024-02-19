@@ -23,6 +23,7 @@ const bookSchema = new mongoose.Schema({
     language: { type: String },
     availableOnline: {type: Boolean},
     price: {type: Number},
+    copies: {type: Number},
     imageLinks: {
       smallThumbnail: { type: String },
       thumbnail: { type: String }
