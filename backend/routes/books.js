@@ -89,26 +89,26 @@ router.get('/author/:author', async (req, res) => {
     
 });
 
-//Get books by Genre (or category?? if same?)
-router.get('/genre/:genre', async (req, res) => {
+// //Get books by Genre (or category?? if same?)
+// router.get('/genre/:genre', async (req, res) => {
 
-  try {
+//   try {
 
-    const books = await Book.find({ genre: req.params.genre });
+//     const books = await Book.find({ genre: req.params.genre });
 
-    if (books.length === 0) 
-    {
-      return res.status(404).json({ message: 'Books in this genre not found' });
-    }
+//     if (books.length === 0) 
+//     {
+//       return res.status(404).json({ message: 'Books in this genre not found' });
+//     }
 
-    res.status(200).json(books);
+//     res.status(200).json(books);
 
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Server error' });
+//   }
     
-});
+// });
 
 
 //Get books by Category

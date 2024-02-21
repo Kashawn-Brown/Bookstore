@@ -111,11 +111,12 @@ router.post('/login', async (req, res) => {
   
 });
 
+const auth = require('../routes/authMiddleware');
 
-
-//Admin login??
-
-
+// Protected route that requires authentication
+router.get('/protected', auth, (req, res) => {
+  res.json({ message: 'You are authenticated.', user: req.user });
+});
 
 
 
