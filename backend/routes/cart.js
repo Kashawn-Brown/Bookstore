@@ -6,8 +6,10 @@ const router = express.Router();
 
 const Cart = require('../models/cartModel');
 
+const auth = require('../routes/authMiddleware');
+
 //Get shopping cart items 
-router.get('/cart', async (req, res) => {
+router.get('/cart', auth, async (req, res) => {
 
   try{
 
@@ -30,7 +32,7 @@ router.get('/cart', async (req, res) => {
 
 
 //Add item to shopping cart 
-router.post('add-to-cart/:id', async (req, res) => {
+router.post('add-to-cart/:id', auth, async (req, res) => {
 
   const { Id } = req.params;
   const { quantity } = req.body;

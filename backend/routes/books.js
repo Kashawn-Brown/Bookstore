@@ -133,6 +133,62 @@ router.get('/category/:category', async (req, res) => {
     
 });
 
+
+const auth = require('../routes/authMiddleware');
+
+//Creating a new book
+router.post('/', auth, async (req, res) => {
+  
+  //Add logic for if creating a duplicate book
+  try {
+    
+    const newBook = await Book.create(req.body);
+    res.status(201).json(newBook);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+//Updating an existing book
+router.put('/:id', auth, async (req, res) => {
+  
+  try {
+    
+    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updatedBook) 
+    {
+      return res.status(404).json({ message: 'Book not found' });
+    }
+
+    res.status(200).json(updatedBook);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+//Deleting a book
+router.delete('/:id', auth, async (req, res) => {
+  
+  try {
+    
+    const deletedBook = await Book.findByIdAndDelete(req.params.id);
+    if (!deletedBook) 
+    {
+      return res.status(404).json({ message: 'Book not found' });
+    }
+
+    res.status(200).json({message: "Book deleted Successfully"});
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 //Exporting the router object, making it available for use in other parts of the application
 module.exports = router;
 
