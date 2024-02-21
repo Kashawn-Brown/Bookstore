@@ -9,7 +9,7 @@ const Order = require('../models/orderModel');
 const auth = require('../routes/authMiddleware');
 
 //Get all orders 
-router.get('/get-orders', auth, async (req, res) => {
+router.get('/get-orders', async (req, res) => {
 
   try
   {
@@ -31,7 +31,7 @@ router.get('/get-orders', auth, async (req, res) => {
 
 
 // Place new order
-router.post('/place-order', auth, async (req, res) => {
+router.post('/place-order', async (req, res) => {
 
   try
   {
