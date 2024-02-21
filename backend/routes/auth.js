@@ -111,6 +111,9 @@ router.post('/login', async (req, res) => {
   
 });
 
+
+
+
 const auth = require('../routes/authMiddleware');
 
 // Protected route that requires authentication

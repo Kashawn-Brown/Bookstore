@@ -2,6 +2,7 @@
 
 /* 
 To consider:
+  Creating a new book, updating a book, deleting a book
   recommended books (same series, same author, etc.)
   Different type of search (keyword...)
 */
