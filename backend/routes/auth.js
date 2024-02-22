@@ -15,6 +15,9 @@ const jwt = require('jsonwebtoken');
 
 //Importing the mongoose schema for Users
 const User = require('../models/userModel');
+const Book = require('../models/bookModel');
+const Cart = require('../models/cartModel');
+const Order = require('../models/orderModel');
 
 /* User Authentication routes */
 //data sent in the request body (req.body)

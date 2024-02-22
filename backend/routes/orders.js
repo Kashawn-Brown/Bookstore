@@ -3,8 +3,11 @@
 const express = require('express');
 const router = express.Router();
 
+const User = require('../models/userModel');
+const Book = require('../models/bookModel');
 const Cart = require('../models/cartModel');
 const Order = require('../models/orderModel');
+
 
 const auth = require('../routes/authMiddleware');
 
@@ -14,8 +17,16 @@ router.get('/get-orders', async (req, res) => {
   try
   {
 
+    /* HARDCODED USER INFO, NEED TO FIND OUT HOW TO PASS IT AROUND THROUGH JWT */
+    req.user = { _id: '65d69050c88f266a2ac5ade4' };
+
     // Find orders for the current user
     const orders = await Order.find({ userId: req.user._id });
+
+    if (orders.length === 0) 
+    {
+      return res.status(404).json({ message: 'No orders found' });
+    }
 
     res.status(200).json(orders);
 
@@ -36,12 +47,19 @@ router.post('/place-order', async (req, res) => {
   try
   {
 
+    /* HARDCODED USER INFO, NEED TO FIND OUT HOW TO PASS IT AROUND THROUGH JWT */
+    req.user = { _id: '65d69050c88f266a2ac5ade4' };
+
     // Find the cart for the current user
     const cart = await Cart.findOne({ userId: req.user._id });
 
     if (!cart) 
     {
       return res.status(404).json({ message: 'Cart not found' });
+    }
+    if (cart.items.length === 0) 
+    {
+      return res.status(404).json({ message: 'Cart is empty' });
     }
 
     // Calculate the total amount

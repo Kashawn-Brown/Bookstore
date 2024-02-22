@@ -12,7 +12,10 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 
+const User = require('../models/userModel');
 const Book = require('../models/bookModel');
+const Cart = require('../models/cartModel');
+const Order = require('../models/orderModel');
 
 //Get all books
 router.get('/allBooks', async (req, res) => {
