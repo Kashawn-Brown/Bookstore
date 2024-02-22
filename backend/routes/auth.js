@@ -26,10 +26,10 @@ router.post('/register', async (req, res) => {
   try{
 
     // Take the username, email and password the user gives to create their account
-    const { username, email, password } = req.body;
+    const { userName, email, password } = req.body;
 
     //Error message is returned if any of the values were left blank
-    if (!username || !email || !password) 
+    if (!userName || !email || !password) 
     {
       return res.status(400).json({ message: 'Please provide username, email, and password' });
     }
@@ -59,7 +59,7 @@ router.post('/register', async (req, res) => {
 
 
     //Create the new user with the information
-    const newUser = new User({ username, email, password: hashedPassword });
+    const newUser = new User({ userName, email, password: hashedPassword });
     await newUser.save();
 
 
@@ -94,7 +94,7 @@ router.post('/login', async (req, res) => {
     //Check if the password is correct
     const correctPassword = await bcrypt.compare(password, existingUser.password);
     if (!correctPassword) {
-      return res.status(400).json({ message: 'Invalid password' });
+      return res.status(400).json({ message: 'Incorrect password' });
     }
 
 
