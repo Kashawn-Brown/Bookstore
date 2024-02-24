@@ -10,12 +10,18 @@ import Cart from './Components/Cart';
 import Checkout from './Components/Checkout';
 import Orders from './Components/Orders';
 
+
+import Navigation from './Components/Navigation';
+import Login from './Components/Login';
+
 function App() {
   return (
     <Router>
       <div>
+      <Navigation />
       <Routes>
         <Route exact path="/" element={<Home/>} />
+        <Route path="/login" element={<Login/>} />
         <Route path="/books" element={<Books/>} />
         <Route path="/cart" element={<Cart/>} />
         <Route path="/checkout" element={<Checkout/>} />

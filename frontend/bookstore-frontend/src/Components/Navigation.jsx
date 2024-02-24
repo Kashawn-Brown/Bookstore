@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
-  import React from 'react';
+import React from 'react';
 
-  
-  import '../style/Nav.css';
+import LoginButton from './LoginButton';
+
+
+import '../style/Nav.css';
 
 
 function Navigation() {
@@ -15,6 +17,7 @@ function Navigation() {
             <li><Link to="/checkout" className="nav-link">Checkout</Link></li>
             <li><Link to="/orders" className="nav-link">Orders</Link></li>
           </ul>
+          <LoginButton />
     </nav>
   );
 }

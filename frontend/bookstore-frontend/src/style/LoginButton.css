@@ -1,0 +1,18 @@
+.login-button {
+    position: absolute;
+    top: 50px; /* Adjust this value to fit your navbar height */
+    right: 30px;
+  }
+
+  .login-button button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-button button:hover {
+    background-color: #0056b3;
+  }
