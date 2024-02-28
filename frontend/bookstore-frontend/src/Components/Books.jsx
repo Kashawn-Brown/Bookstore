@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 import Navigation from './Navigation';
 
+import '../style/Books.css';
+
 function Books() {
 
     const [books, setBooks] = useState([]);
@@ -15,30 +17,27 @@ function Books() {
   }, []);
 
   return (
-    
     <div>
         <Navigation />
         
-      <h1>Books</h1>
-      <ul>
-        {books.map(book => (
-          <li key={book._id}>
-            <h2>{book.title}</h2>
-            <p>Author(s): {book.authors.join(', ')}</p>
-            <p>Description: {book.description}</p>
-            {/* Add more book details here */}
-          </li>
+        <h1>Books</h1>
+        <div className="books-grid">
+        {books.map((book) => (
+            <div key={book._id} className="book-card">
+                <img src={book.imageLinks.thumbnail} alt={book.title} className="book-thumbnail" />
+                <div className="book-info">
+                    <h2>{book.title.length > 25 ? book.title.substring(0, 25) + "..." : book.title}</h2>
+                    <p>by {book.authors.join(', ')}</p>
+                    <p>{book.description.substring(0, 50) + "..."}</p>
+                    <p>${book.price}</p>
+                </div>
+            </div>
         ))}
-      </ul>
+        </div>
+      
     </div>
   );
-//   return (
-//     <div>
-//       <h1>Books Page</h1>
-//       {/* Add your books list here */}
-//     </div>
-    
-//   );
+
 }
 
 export default Books;
