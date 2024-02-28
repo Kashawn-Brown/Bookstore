@@ -1,20 +1,21 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import Navigation from './Navigation';
 
 import '../style/Login.css';
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-  const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/login', {
-        username,
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        email,
         password,
       });
       console.log(response.data);
@@ -46,16 +47,22 @@ function Login() {
 //   );
 
   return (
-    <div className="login-form">
-        <Navigation />
-      <h2>Login</h2>
-      <form>
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" required />
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-        <button type="submit">Login</button>
-      </form>
+    <div>
+        <div className="login-form">
+            <Navigation />
+            <h2>Login</h2>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="email">Email:</label>
+                <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+
+                <label htmlFor="password">Password:</label>
+                <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    
+        <Link to="/register"> <button>Register</button> </Link>
     </div>
   );
 
@@ -63,5 +70,4 @@ function Login() {
 }
 
 export default Login;
-
 

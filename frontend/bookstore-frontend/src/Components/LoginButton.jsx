@@ -6,7 +6,7 @@ import '../style/LoginButton.css';
 function LoginButton() {
   return (
     <div className="login-button">
-      <Link to="/login"> <button>Login/Register</button> </Link>
+      <Link to="/login"> <button>Login</button> </Link>
     </div>
   );
 }
