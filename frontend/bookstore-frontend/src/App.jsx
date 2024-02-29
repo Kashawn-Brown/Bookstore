@@ -6,6 +6,7 @@ import React from 'react';
 
 import Home from './Components/Home';
 import Books from './Components/Books';
+import Book from './Components/Book';
 import Cart from './Components/Cart';
 import Checkout from './Components/Checkout';
 import Orders from './Components/Orders';
@@ -28,6 +29,7 @@ function App() {
         <Route path="/cart" element={<Cart/>} />
         <Route path="/checkout" element={<Checkout/>} />
         <Route path="/orders" element={<Orders/>} />
+        <Route path="/book/:id" element={<Book />} /> {/* Dynamic route for book details */}
       </Routes>
       </div>
     </Router>

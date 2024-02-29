@@ -22,4 +22,18 @@
   .book-info {
     text-align: center;
   }
+
+  .book-link {
+    text-align: center;
+  }
+  
+  .book-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Use the default text color */
+}
+
+.book-link:hover {
+    text-decoration: none; /* Remove underline on hover */
+    color: inherit; /* Use the default text color on hover */
+}
   
