@@ -23,6 +23,9 @@ function Register() {
     }
     try {
         console.log("HELLO");
+        console.log(userName);
+        console.log(email);
+        console.log(password);
         const response = await axios.post('http://localhost:5000/api/auth/register', {
         userName,
         email,
@@ -31,6 +34,9 @@ function Register() {
 
         console.log(response.data);
         // Handle successful login (e.g., store token in localStorage)
+
+        const data = await response.json();
+        localStorage.setItem('jwtToken', data.token); // Store the JWT token in local storage
     } catch (error) {
       console.error('Register error:', error);
       // Handle login error (e.g., display error message)
@@ -39,33 +45,35 @@ function Register() {
 
 
   return (
-    <div className="register-form">
+    <div>
         <Navigation />
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="userName">Username: </label>
-        <input type="text" id="userName" name="userName" value={userName} onChange={(e) => setUsername(e.target.value)} required />
+        <div className="register-form">
+        <h2>Register</h2>
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="userName">Username: </label>
+            <input type="text" id="userName" name="userName" value={userName} onChange={(e) => setUsername(e.target.value)} required />
 
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <label htmlFor="email">Email:</label>
+            <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <label htmlFor="password">Password:</label>
+            <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 
-        <label htmlFor="confirm-password">Confirm Password:</label>
-        <input
-          type="password"
-          id="confirm-password"
-          name="confirm-password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
+            <label htmlFor="confirm-password">Confirm Password:</label>
+            <input
+            type="password"
+            id="confirm-password"
+            name="confirm-password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            />
 
-        {error && <div className="error">{error}</div>}
-        
-        <button type="submit">Create Account</button>
-      </form>
+            {error && <div className="error">{error}</div>}
+            
+            <button type="submit">Create Account</button>
+        </form>
+        </div>
     </div>
   );
 

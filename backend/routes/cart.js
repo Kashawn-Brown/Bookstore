@@ -9,19 +9,19 @@ const Book = require('../models/bookModel');
 const Cart = require('../models/cartModel');
 const Order = require('../models/orderModel');
 
-const auth = require('../routes/authMiddleware');
+const { authenticateToken } = require('../routes/authMiddleware');
 const mongoose = require('mongoose');
 
 //Get shopping cart items 
-router.get('/cart', async (req, res) => {
+router.get('/cart', authenticateToken, async (req, res) => {
 
   try{
 
     /* HARDCODED USER INFO, NEED TO FIND OUT HOW TO PASS IT AROUND THROUGH JWT */
-    req.user = { _id: '65d69050c88f266a2ac5ade4' };
+    //req.user = { _id: '65d69050c88f266a2ac5ade4' };
 
     // Find users cart
-    const cart = await Cart.findOne({ userId: req.user._id });
+    const cart = await Cart.findOne({ userId: req.user.userId });
     //*Maybe should have cart automatically made when account made...
     if (!cart) 
     {
@@ -44,12 +44,12 @@ router.get('/cart', async (req, res) => {
 
 
 //Add item to shopping cart 
-router.post('/add-to-cart', async (req, res) => {
+router.post('/add-to-cart', authenticateToken, async (req, res) => {
 
   
   try {
 
-    const { bookId, quantity } = req.body;
+    const { bookId, quantity=1 } = req.body;
 
 
     // Validate the bookId
@@ -67,16 +67,16 @@ router.post('/add-to-cart', async (req, res) => {
     }
 
     /* HARDCODED USER INFO, NEED TO FIND OUT HOW TO PASS IT AROUND THROUGH JWT */
-    req.user = { _id: '65d69050c88f266a2ac5ade4' };
+    //req.user = { _id: '65d69050c88f266a2ac5ade4' };
 
     //Find the users cart
-    let cart = await Cart.findOne({ userId: req.user._id });
+    let cart = await Cart.findOne({ userId: req.user.userId });
 
     //*Maybe should have cart automatically made when account made... does it matter...
     if (!cart) 
     {
       // If the cart doesn't exist, create a new one
-      cart = new Cart({ userId: req.user._id, items: [] });
+      cart = new Cart({ userId: req.user.userId, items: [] });
     }
 
     //See if the item being added already exists in the cart
@@ -87,7 +87,8 @@ router.post('/add-to-cart', async (req, res) => {
     }
     else
     {
-      cart.items.push({ bookId, quantity });
+      imageLinks = book.imageLinks
+      cart.items.push({ bookId, quantity, imageLinks});
     }
 
     // Save the updated cart
@@ -105,16 +106,16 @@ router.post('/add-to-cart', async (req, res) => {
 
   
 //Remove item from shopping cart logic
-router.delete('/remove-from-cart', async (req, res) => {
+router.delete('/remove-from-cart', authenticateToken, async (req, res) => {
 
   try{
 
     const { bookId } = req.body;
 
     /* HARDCODED USER INFO, NEED TO FIND OUT HOW TO PASS IT AROUND THROUGH JWT */
-    req.user = { _id: '65d69050c88f266a2ac5ade4' };
+    //req.user = { _id: '65d69050c88f266a2ac5ade4' };
 
-    const cart = await Cart.findOne({ userId: req.user._id });
+    const cart = await Cart.findOne({ userId: req.user.userId });
     //*Maybe should have cart automatically made when account made...
     if (!cart) 
     {
@@ -128,7 +129,7 @@ router.delete('/remove-from-cart', async (req, res) => {
       if(item.quantity > 1)
         item.quantity--;
       else
-        cart.items = cart.items.filter(item => item.bookId.toString() !== bookId);
+        cart.items = cart.items.filter(item => item._id.toString() !== bookId);
 
       // Save the updated cart
       await cart.save();
@@ -138,6 +139,8 @@ router.delete('/remove-from-cart', async (req, res) => {
     else
     {
       res.status(200).json({ message: 'No such item in cart' });
+      console.log(cart.items)
+      console.log(bookId)
     }
 
 

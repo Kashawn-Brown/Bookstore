@@ -14,9 +14,12 @@ const Schema = mongoose.Schema;
 // Define a schema for cart items
 const cartItemSchema = new Schema({
     bookId: { type: Schema.Types.ObjectId, ref: 'Book', required: true },
-    quantity: { type: Number, required: true },
-    price: { type: Number, required: true, default: 0 } // Price of the item
-
+    quantity: { type: Number, required: true, default: 1 },
+    price: { type: Number, required: true, default: 0 }, // Price of the item
+    imageLinks: {
+        smallThumbnail: { type: String },
+        thumbnail: { type: String }
+      },
 });
 
 // Define a schema for the shopping cart 

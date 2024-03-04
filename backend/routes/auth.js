@@ -67,7 +67,7 @@ router.post('/register', async (req, res) => {
 
 
     //Generate JWT token
-    const token = jwt.sign({ userId: newUser._id }, 'secretKey', { expiresIn: '2h' });
+    const token = jwt.sign({ userId: newUser._id, admin: false }, 'secretKey', { expiresIn: '2h' });
 
     res.status(201).json({ message: 'User created', token });
 
@@ -117,12 +117,12 @@ router.post('/login', async (req, res) => {
 
 
 
-const auth = require('../routes/authMiddleware');
+// const auth = require('../routes/authMiddleware');
 
-// Protected route that requires authentication
-router.get('/protected', auth, (req, res) => {
-  res.json({ message: 'You are authenticated.', user: req.user });
-});
+// // Protected route that requires authentication
+// router.get('/protected', auth, (req, res) => {
+//   res.json({ message: 'You are authenticated.', user: req.user });
+// });
 
 
 

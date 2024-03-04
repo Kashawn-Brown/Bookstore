@@ -6,8 +6,6 @@ const router = express.Router();
 //importing JSON Web Tokens (jwts) - for authentication and authorization
 const jwt = require('jsonwebtoken');
 
-const config = require('config');
-
 //Authentication Middleware
 function authenticateToken(req, res, next) 
 {
@@ -18,7 +16,7 @@ function authenticateToken(req, res, next)
     }
 
     try {
-      const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+      const decoded = jwt.verify(token, "secretKey");
       req.user = decoded;
       next();
     } catch (ex) {
@@ -29,4 +27,4 @@ function authenticateToken(req, res, next)
 
 
 
-module.exports = router;
+module.exports = {authenticateToken} ;

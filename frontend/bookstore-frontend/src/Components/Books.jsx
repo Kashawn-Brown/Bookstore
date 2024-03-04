@@ -1,15 +1,21 @@
 // import React from 'react';
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-
 import Navigation from './Navigation';
+import '../style/Books.css';
+import axios from 'axios';
+
+
+
+
 //import Book from '/Book';
 
-import '../style/Books.css';
+
 
 function Books() {
 
     const [books, setBooks] = useState([]);
+    const jwtToken = localStorage.getItem('jwtToken');
 
     useEffect(() => {
     fetch('http://localhost:5000/api/books/allBooks')
@@ -17,6 +23,25 @@ function Books() {
       .then(data => setBooks(data))
       .catch(error => console.error('Error fetching books:', error));
   }, []);
+
+
+    const addToCart = (bookId, jwtToken) => {
+        console.log(jwtToken)
+        axios.post('http://localhost:5000/api/cart/add-to-cart', {bookId},{
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': jwtToken // Include your JWT token here
+              }
+        })
+        .then(response => {
+            console.log('Book added to cart:', response.data);
+            // Optionally, you can update your UI to reflect that the book was added to the cart
+          })
+        .catch(error => {
+            console.error('There was a problem adding the book to the cart:', error);
+          });
+        
+    };
 
   return (
     <div>
@@ -36,6 +61,7 @@ function Books() {
                     <p>${book.price}</p>
                 </div>
                 </Link>
+                <button onClick={() => addToCart(book._id, jwtToken)}>Add to Cart</button>
             </div>
             
         ))}

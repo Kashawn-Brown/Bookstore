@@ -9,16 +9,16 @@ const Cart = require('../models/cartModel');
 const Order = require('../models/orderModel');
 
 
-const auth = require('../routes/authMiddleware');
+const {authenticateToken} = require('../routes/authMiddleware');
 
 //Get all orders 
-router.get('/get-orders', async (req, res) => {
+router.get('/get-orders', authenticateToken, async (req, res) => {
 
   try
   {
 
     /* HARDCODED USER INFO, NEED TO FIND OUT HOW TO PASS IT AROUND THROUGH JWT */
-    req.user = { _id: '65d69050c88f266a2ac5ade4' };
+    //req.user = { _id: '65d69050c88f266a2ac5ade4' };
 
     // Find orders for the current user
     const orders = await Order.find({ userId: req.user._id });
@@ -42,13 +42,13 @@ router.get('/get-orders', async (req, res) => {
 
 
 // Place new order
-router.post('/place-order', async (req, res) => {
+router.post('/place-order', authenticateToken, async (req, res) => {
 
   try
   {
 
     /* HARDCODED USER INFO, NEED TO FIND OUT HOW TO PASS IT AROUND THROUGH JWT */
-    req.user = { _id: '65d69050c88f266a2ac5ade4' };
+    //req.user = { _id: '65d69050c88f266a2ac5ade4' };
 
     // Find the cart for the current user
     const cart = await Cart.findOne({ userId: req.user._id });

@@ -31,3 +31,22 @@ body {
   .nav-link:hover {
     text-decoration: underline;
   }
+
+  .logout-button {
+    position: absolute;
+    top: 50px; /* Adjust this value to fit your navbar height */
+    right: 30px;
+  }
+
+  .logout-button button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .logout-button button:hover {
+    background-color: #0056b3;
+  }
