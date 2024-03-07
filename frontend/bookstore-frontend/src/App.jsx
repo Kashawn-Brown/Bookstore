@@ -10,8 +10,6 @@ import Book from './Components/Book';
 import Cart from './Components/Cart';
 import Checkout from './Components/Checkout';
 import Orders from './Components/Orders';
-
-
 import Navigation from './Components/Navigation';
 import Login from './Components/Login';
 import Register from './Components/Register';
@@ -29,7 +27,7 @@ function App() {
         <Route path="/cart" element={<Cart/>} />
         <Route path="/checkout" element={<Checkout/>} />
         <Route path="/orders" element={<Orders/>} />
-        <Route path="/book/:id" element={<Book />} /> {/* Dynamic route for book details */}
+        <Route path="/book/:id" element={<Book/>} /> {/* Dynamic route for book details */}
       </Routes>
       </div>
     </Router>

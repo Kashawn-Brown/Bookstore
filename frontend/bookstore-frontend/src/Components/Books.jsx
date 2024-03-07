@@ -26,7 +26,6 @@ function Books() {
 
 
     const addToCart = (bookId, jwtToken) => {
-        console.log(jwtToken)
         axios.post('http://localhost:5000/api/cart/add-to-cart', {bookId},{
             headers: {
                 'Content-Type': 'application/json',
