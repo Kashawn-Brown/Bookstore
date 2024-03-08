@@ -26,6 +26,8 @@ function Login() {
         localStorage.setItem('jwtToken', response.data.token); // Store the JWT token in local storage
 
         navigate('/', { replace: true }); // Navigate to the home page
+        //window.location.href = '/' // Another way to go to home page
+
         } catch (error) {
         console.error('Login error:', error);
         // Handle login error (e.g., display error message)

@@ -1,7 +1,7 @@
 // import React from 'react';
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Navigation from './Navigation';
+// import Navigation from './Navigation';
 import '../style/Books.css';
 import axios from 'axios';
 
@@ -44,7 +44,7 @@ function Books() {
 
   return (
     <div>
-        <Navigation />
+        {/* <Navigation /> */}
         
         <h1>Books</h1>
         <div className="books-grid">

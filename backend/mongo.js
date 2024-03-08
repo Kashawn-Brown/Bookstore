@@ -37,8 +37,8 @@ async function fetchBooks() {
                 price: 0,
                 copies: 10,
                 imageLinks: {
-                    smallThumbnail: item.volumeInfo.imageLinks.smallThumbnail || "No thumbnail available",
-                    thumbnail: item.volumeInfo.imageLinks.thumbnail || "No thumbnail available"
+                    smallThumbnail: item.volumeInfo.imageLinks?.smallThumbnail || "No thumbnail available",
+                    thumbnail: item.volumeInfo.imageLinks?.thumbnail || "No thumbnail available"
                 },
                 previewLink: item.volumeInfo.previewLink
 
