@@ -2,10 +2,9 @@ import { NavLink, Link } from 'react-router-dom'; //can use NavLink instead of L
 import React, { useState, useEffect } from 'react';
 
 import LoginButton from './LoginButton';
-
+import LogoutButton from './LogoutButton';
 
 import '../style/Nav.css';
-
 
 function Navigation() {
 
@@ -13,14 +12,33 @@ function Navigation() {
 
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
-        if (token) {
-          setIsLoggedIn(true);
-        } else {
+        if (token) 
+        {
+          //Manual decode
+          const base64Url = token.split('.')[1];
+          const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          const decodedToken = JSON.parse(atob(base64));
+          const currentTime = Math.floor(Date.now() / 1000); // Convert milliseconds to seconds
+          if (decodedToken.exp < currentTime) 
+          {
+            // Token has expired
+            localStorage.removeItem('jwtToken');
+            setIsLoggedIn(false);
+          }
+          else
+          {
+             setIsLoggedIn(true);
+          }
+          
+        } 
+        else 
+        {
           setIsLoggedIn(false);
         }
       }, []);
   
      const handleLogout = () => {
+      console.log("hi")
       // Clear the JWT token from local storage
       localStorage.removeItem('jwtToken');
       setIsLoggedIn(false);
@@ -39,9 +57,7 @@ function Navigation() {
           {/* <LoginButton /> */}
         {isLoggedIn ? 
         (
-            <div className="logout-button">
-            <NavLink to="/login"> <button onClick={handleLogout}>Logout</button> </NavLink>
-            </div>
+          <LogoutButton onClick={handleLogout} />
         ) : (
             <LoginButton />
         )}

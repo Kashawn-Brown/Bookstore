@@ -24,7 +24,21 @@ const orderSchema = new Schema({
     items: [orderItemSchema],
     total: { type: Number, required: true },
     status: { type: String, enum: ['pending', 'completed'], default: 'pending' },
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    paymentType: {type: String, enum: ['credit', 'debit'], default: 'credit'},
+    cardInfo: {
+        cardNumber: {type: String, required: true},
+        expiry: {type: String, required: true},
+        CVV: {type: String, required: true}
+    },
+    address: {
+        address: {type: String, required: true},
+        country: {type: String, required: true, default: 'Canada'},
+        city: {type: String, required: true},
+        province: {type: String, required: true},
+        postalCode: {type: String, required: true}
+    },
+
 
 });
 

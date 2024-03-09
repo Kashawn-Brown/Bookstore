@@ -21,7 +21,7 @@ router.get('/get-orders', authenticateToken, async (req, res) => {
     //req.user = { _id: '65d69050c88f266a2ac5ade4' };
 
     // Find orders for the current user
-    const orders = await Order.find({ userId: req.user._id });
+    const orders = await Order.find({ userId: req.user.userId });
 
     if (orders.length === 0) 
     {
@@ -46,12 +46,18 @@ router.post('/place-order', authenticateToken, async (req, res) => {
 
   try
   {
+    const address = req.body.orderData.address;
+    const cardInfo = req.body.orderData.cardInfo;
+    console.log(req.body)
+    console.log(address)
+    console.log(cardInfo)
 
     /* HARDCODED USER INFO, NEED TO FIND OUT HOW TO PASS IT AROUND THROUGH JWT */
     //req.user = { _id: '65d69050c88f266a2ac5ade4' };
 
     // Find the cart for the current user
-    const cart = await Cart.findOne({ userId: req.user._id });
+    
+    const cart = await Cart.findOne({ userId: req.user.userId });
 
     if (!cart) 
     {
@@ -72,9 +78,20 @@ router.post('/place-order', authenticateToken, async (req, res) => {
     // Create a new order
     // Will take the default values for the status and created fields
     const order = new Order({
-      userId: req.user._id,
+      userId: req.user.userId,
       items: cart.items,
-      total //shorthand since the variable name and object property name are the same (aka total: total)
+      total, //shorthand since the variable name and object property name are the same (aka total: total)
+      cardInfo: {
+        cardNumber: cardInfo.cardNumber,
+        expiry: cardInfo.expiry,
+        CVV: cardInfo.CVV
+      },
+      address: {
+        address: address.address,
+        city: address.city,
+        province: address.province,
+        postalCode: address.postalCode
+      }
     });
 
     // Save the order to the database

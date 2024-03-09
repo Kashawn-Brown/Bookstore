@@ -31,6 +31,7 @@ function Book() {
     
       return (
         <div>
+          <Navigation />
           <h2>{book.title}</h2>
           <img src={book.imageLinks.thumbnail} alt={book.title} className="book-thumbnail" style={{ display: 'block', margin: '0 auto', width:"200px", height:"300px"}} />
           <p>Author(s): {book.authors.join(', ')}</p>
