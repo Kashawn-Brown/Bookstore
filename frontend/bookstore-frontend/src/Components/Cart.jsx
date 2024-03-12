@@ -20,7 +20,7 @@ function Cart() {
           }
         })
         .then(response => setCart(response.data))
-        .catch(error => console.error('Error fetching Cart Items:', error));
+        .catch(error => console.error('Error fetching Cart Items:', error.response.data.message));
       });
 
       const removeItem = (bookId, jwtToken) => {
@@ -50,6 +50,9 @@ function Cart() {
       <div>
           <Navigation />
           <h1>Cart Page</h1>
+          {cartItems.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
           <ul className="cart-items">
             {cartItems.map((item) => (
             <li key={item._id} className="cart-item">
@@ -65,6 +68,7 @@ function Cart() {
             </li>
             ))}
         </ul>
+      )}
       </div>
     );
   }

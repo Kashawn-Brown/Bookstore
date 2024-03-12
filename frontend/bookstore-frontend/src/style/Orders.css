@@ -1,0 +1,28 @@
+.orders-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .order {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .order h2 {
+    margin-top: 0;
+  }
+  
+  .order ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .order li {
+    margin-bottom: 5px;
+  }
+  
+  /* Add more styles as needed */
+  

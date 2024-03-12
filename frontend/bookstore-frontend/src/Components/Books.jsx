@@ -24,7 +24,6 @@ function Books() {
       .catch(error => console.error('Error fetching books:', error));
   }, []);
 
-
     const addToCart = (bookId, jwtToken) => {
         axios.post('http://localhost:5000/api/cart/add-to-cart', {bookId},{
             headers: {
@@ -33,12 +32,15 @@ function Books() {
               }
         })
         .then(response => {
+            alert('Book added to cart');
             console.log('Book added to cart:', response.data);
             // Optionally, you can update your UI to reflect that the book was added to the cart
           })
         .catch(error => {
             console.error('There was a problem adding the book to the cart:', error);
           });
+
+
         
     };
 
